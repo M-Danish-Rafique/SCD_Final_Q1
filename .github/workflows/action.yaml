@@ -1,6 +1,8 @@
 on: [push]
 jobs:
-  runs-on: ubuntu-latest
+  
+  runs-on: ubuntu
+
   steps:
     - name: Check out repository code
       uses: actions/checkout@v4
