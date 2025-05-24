@@ -1,0 +1,29 @@
+on: [push]
+jobs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Check out repository code
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: npm ci
+
+    - name: Testing Blog Service
+    - run: echo "Testing Blog Service..."
+
+    - name: Testing Comment Service
+    - run: echo "Testing Comment Service..."
+
+    - name: Testing Profile Service
+    - run: echo "Testing Profile Service..."
+
+    - name: Set up Docker Compose
+      uses: docker/setup-compose-action@v2
+
+    - name: Build with Docker Compose
+      run: docker compose build

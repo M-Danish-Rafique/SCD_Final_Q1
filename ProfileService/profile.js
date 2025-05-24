@@ -1,6 +1,6 @@
 const express = require('express');
-const { updateProfile, getProfile } = require('../controllers/profileController');
-const authMiddleware = require('../middleware/auth');
+const { updateProfile, getProfile } = require('./profileController');
+const authMiddleware = require('../api-gateway/auth');
 const router = express.Router();
 
 router.post('/', authMiddleware, updateProfile);        // ✅ Protected

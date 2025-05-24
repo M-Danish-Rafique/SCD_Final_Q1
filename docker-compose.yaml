@@ -1,0 +1,90 @@
+version: "3"
+services: 
+
+  apigateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - 5000:5000
+    networks:
+      - mern-network
+
+    depends_on:
+      - auth-service
+      - blog-service
+      - comment-service
+      - profile-service
+
+  auth-service:
+    build:
+      context: ./AuthService
+      dockerfile: Dockerfile
+    ports:
+      - 5001:5001
+    networks:
+      - mern-network
+
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongo:27017/authdb 
+
+  blog-service:
+    build:
+      context: ./BlogService
+      dockerfile: Dockerfile
+    ports:
+      - 5002:5002
+    networks:
+      - mern-network
+
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongo:27017/blogdb 
+
+  comment-service:
+    build:
+      context: ./CommentService
+      dockerfile: Dockerfile
+    ports:
+      - 5003:5003
+    networks:
+      - mern-network
+
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongo:27017/commentdb 
+
+  profile-service:
+    build:
+      context: ./ProfileService
+      dockerfile: Dockerfile
+    ports:
+      - 5004:5004
+    networks:
+      - mern-network
+
+    depends_on:
+      - mongodb
+    environment:
+      MONGO_URI: mongodb://mongo:27017/profiledb 
+
+  mongodb:
+    image: mongo:latest  
+    ports:
+      - "27017:27017"  
+    networks:
+      - mern-network
+    volumes:
+      - mongo-data:/data/db  
+      
+networks:
+  mern-network:
+    driver: bridge
+
+volumes:
+  mongo-data:
+    driver: local

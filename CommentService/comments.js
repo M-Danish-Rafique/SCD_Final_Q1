@@ -1,6 +1,6 @@
 const express = require('express');
-const { addComment, getComments } = require('../controllers/commentController');
-const authMiddleware = require('../middleware/auth');
+const { addComment, getComments } = require('../CommentService/commentController');
+const authMiddleware = require('../api-gateway/auth');
 const router = express.Router();
 
 router.post('/', authMiddleware, addComment);           // ✅ Protected

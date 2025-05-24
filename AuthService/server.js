@@ -1,3 +1,4 @@
+// Auth Service
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
@@ -10,15 +11,9 @@ app.use(express.json());
 app.use(cors());
 
 // Routes
-const authRoutes = require('./routes/auth');
-const blogRoutes = require('./routes/blogs');
-const commentRoutes = require('./routes/comments');
-const profileRoutes = require('./routes/profile');
+const authRoutes = require('./auth');
 
 app.use('/api/auth', authRoutes);
-app.use('/api/blogs', blogRoutes);
-app.use('/api/comments', commentRoutes);
-app.use('/api/profile', profileRoutes);
 
 // MongoDB connection
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
